@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { pipe, tap } from 'rxjs';
+import { Observable, pipe, tap } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -16,15 +16,25 @@ export class AppComponent {
   }
 
   public getMethod() {
-    this.http.get(this.uri).subscribe(res => console.log(res), error => console.log('erro ao buscar usuarios'));
+    return this.http.get(this.uri).subscribe({
+      next: res => console.log(res),
+      error: err => err.status === 404 ? console.log('Comentario nao encontrado') : console.log(err)
+    });
   }
 
   public postMethod() {
     let body = 'Novo comentario aqui';
 
-    this.http.post(this.uri, { id: null, body: body }).subscribe({
-      next: res => console.log(res),
+    return this.http.post(this.uri, { id: null, body: body }).subscribe({
+      next: () => console.log(`Comentario salvo com sucesso`),
       error: err => console.log(err)
+    });
+  }
+
+  public deleteMethod() {
+    return this.http.delete(`${this.uri}/1`).subscribe({
+      next: () => console.log(`Comentario deletado com sucesso`),
+      error: err => err.status === 404 ? console.log('Comentario nao encontrado') : console.log(err)
     });
   }
 }
