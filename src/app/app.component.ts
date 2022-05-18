@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, pipe, tap } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -36,5 +35,16 @@ export class AppComponent {
       next: () => console.log(`Comentario deletado com sucesso`),
       error: err => err.status === 404 ? console.log('Comentario nao encontrado') : console.log(err)
     });
+  }
+
+  public updateMethod() {
+    let body = 'Atualização do comentario aqui';
+
+    return this.http.patch(`${this.uri}/2`, {
+      body: body
+    }).subscribe({
+      next: () => console.log('Comentario editado com sucesso'),
+      error: err => console.log(err)
+    })
   }
 }

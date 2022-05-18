@@ -8,7 +8,8 @@
   ],
   "comments": [
     {
-      "id": 2
+      "id": 2,
+      "body": "Atualização do comentario aqui"
     },
     {
       "id": 3
@@ -18,7 +19,7 @@
       "id": 4
     },
     {
-      "body": "Novo comentario aqui",
+      "body": "Atualização do comentario aqui",
       "id": 5
     },
     {
@@ -27,6 +28,10 @@
     },
     {
       "id": 7,
+      "body": "Novo comentario aqui"
+    },
+    {
+      "id": 8,
       "body": "Novo comentario aqui"
     }
   ],
