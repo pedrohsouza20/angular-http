@@ -1,46 +1,74 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHandler } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { SafeSubscriber } from 'rxjs/internal/Subscriber';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CommentsService {
+export class CommentsService extends HttpClient {
   readonly uri: string;
-  constructor(private http: HttpClient) { this.uri = 'http://localhost:3000/comments'; }
+  constructor(handler: HttpHandler) {
+    super(handler);
+    this.uri = 'http://localhost:3000/comments';
+  }
 
-  public getMethod() {
-    return this.http.get(this.uri).subscribe({
-      next: res => console.log(res),
-      error: err => err.status === 404 ? console.log('Comentario nao encontrado') : console.log(err)
+  public getMethod(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.get(this.uri).subscribe({
+        next: res => { console.log(res); resolve(res) },
+        error: err => {
+          err.status === 404 ? console.log('Comentario nao encontrado') : console.log(err);
+          reject(err);
+        }
+      });
+    })
+
+  }
+
+  public postMethod(commentBody: string): Promise<any> {
+
+    return new Promise((resolve, reject) => {
+      this.post(this.uri, { id: null, body: commentBody }).subscribe({
+        next: res => { console.log(`Comentario salvo com sucesso`); resolve(res) },
+        error: err => {
+          console.log(err); reject(err);
+        }
+      })
     });
   }
 
-  public postMethod() {
-    let body = 'Novo comentario aqui';
-
-    return this.http.post(this.uri, { id: null, body: body }).subscribe({
-      next: () => console.log(`Comentario salvo com sucesso`),
-      error: err => console.log(err)
-    });
-  }
-
-  public deleteMethod() {
-    return this.http.delete(`${this.uri}/1`).subscribe({
-      next: () => console.log(`Comentario deletado com sucesso`),
-      error: err => err.status === 404 ? console.log('Comentario nao encontrado') : console.log(err)
-    });
-  }
-
-  public updateMethod() {
-    let body = 'Atualização do comentario aqui';
-
-    return this.http.patch(`${this.uri}/2`, {
-      body: body
-    }).subscribe({
-      next: () => console.log('Comentario editado com sucesso'),
-      error: err => console.log(err)
+  public deleteMethod(id: number): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.delete(`${this.uri}/${id}`).subscribe({
+        next: (res) => {
+          console.log(`Comentario deletado com sucesso`);
+          resolve(res)
+        },
+        error: err => {
+          err.status === 404 ? console.log('Comentario nao encontrado') : console.log(err);
+          reject(err);
+        }
+      });
     })
   }
 
+  public updateMethod(id: number): Promise<any> {
+    let body = 'Atualização do comentario aqui';
 
+    return new Promise((resolve, reject) => {
+      this.patch(`${this.uri}/${id}`, {
+        body: body
+      }).subscribe({
+        next: (res) => {
+          console.log('Comentario editado com sucesso', res);
+          resolve(res);
+        },
+        error: err => {
+          console.log(err);
+          reject(err);
+        }
+      })
+    })
+  }
 }

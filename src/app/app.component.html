@@ -1,12 +1,21 @@
 <button (click)="getMethod()">
   GET
 </button>
-<button (click)="postMethod()">
-  POST
-</button>
-<button (click)="deleteMethod()">
-  DELETE
-</button>
-<button (click)="updateMethod()">
-  UPDATE
-</button>
+<form action="">
+  <label for="new-comment">Novo comentário</label>
+  <textarea #newCommentBody type="text" name="new-comment" id="new-comment"></textarea>
+  <button (click)="postMethod(newCommentBody.value)">
+    Salvar
+  </button>
+</form>
+
+
+<div *ngFor="let comment of comments">
+  <li>ID: {{comment.id}}, Comentário: {{comment.body}} <button (click)="deleteMethod(comment.id)">
+      DELETE
+    </button>
+    <button (click)="updateMethod(comment.id)">
+      UPDATE
+    </button>
+  </li>
+</div>

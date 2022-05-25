@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Route } from '@angular/router';
-import { Comments } from 'src/app/Comments';
 
 import { CommentsService } from 'src/services/core/comments.service';
 
@@ -13,33 +12,41 @@ import { CommentsService } from 'src/services/core/comments.service';
 
 export class AppComponent implements OnInit {
   public commentse: any;
+  public comments: any;
   public inscricao: any;
+
   constructor(private commentsService: CommentsService, private route: ActivatedRoute) {
   }
   ngOnInit(): void {
-    this.inscricao = this.route.data.subscribe((info: { comments: Comments }) => {
-      console.log(info);
-      this.commentse = info.commentsa;
-    })
+    this.getComments();
   }
 
   title = 'angular-http';
 
+  public getComments() {
+    this.commentsService.getMethod().then((data) => {
+      this.comments = data;
+    })
+  }
+
+  public showSubscription(): void {
+    console.log(this.inscricao);
+  }
 
   public getMethod() {
     this.commentsService.getMethod();
   }
 
-  public postMethod() {
-    this.commentsService.postMethod();
+  public postMethod(commentBody: string) {
+    this.commentsService.postMethod(commentBody);
   }
 
-  public deleteMethod() {
-    this.commentsService.deleteMethod();
+  public deleteMethod(id: number) {
+    this.commentsService.deleteMethod(id);
   }
 
-  public updateMethod() {
-    this.commentsService.updateMethod();
+  public updateMethod(id: number) {
+    this.commentsService.updateMethod(id);
   }
 
 }

@@ -12,23 +12,16 @@
       "body": "Atualização do comentario aqui"
     },
     {
-      "id": 3
+      "id": 3,
+      "body": "Novo comentario aqui"
     },
     {
-      "commentBody": "Novo comentario aqui",
-      "id": 4
-    },
-    {
-      "body": "Atualização do comentario aqui",
-      "id": 5
+      "id": 4,
+      "body": "Novo comentario aqui"
     },
     {
       "id": 6,
-      "body": "Novo comentario aqui"
-    },
-    {
-      "id": 7,
-      "body": "Novo comentario aqui"
+      "body": "Atualização do comentario aqui"
     },
     {
       "id": 8,
@@ -37,6 +30,10 @@
     {
       "id": 9,
       "body": "Novo comentario aqui"
+    },
+    {
+      "id": 10,
+      "body": "novo comentario usando dinamico"
     }
   ],
   "profile": {

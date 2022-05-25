@@ -6,14 +6,8 @@ import { AppComponent } from 'src/app/app.component';
 import { CommentsService } from 'src/services/core/comments.service';
 import { CommentsResolver } from 'src/app/guards/comments.resolver';
 
-
-interface Comments {
-  id?: number;
-  body: string
-}
-
 const routes: Routes = [
-  { path: '', component: AppComponent, resolve: { commentsa: CommentsResolver } }
+  { path: '', component: AppComponent, resolve: { comments: CommentsResolver } }
 ];
 
 @NgModule({
