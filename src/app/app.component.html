@@ -1,14 +1,13 @@
 <button (click)="getMethod()">
   GET
 </button>
-<form action="">
+<form>
   <label for="new-comment">Novo comentário</label>
   <textarea #newCommentBody type="text" name="new-comment" id="new-comment"></textarea>
   <button (click)="postMethod(newCommentBody.value)">
     Salvar
   </button>
 </form>
-
 
 <div *ngFor="let comment of comments">
   <li>ID: {{comment.id}}, Comentário: {{comment.body}} <button (click)="deleteMethod(comment.id)">
@@ -19,3 +18,5 @@
     </button>
   </li>
 </div>
+
+

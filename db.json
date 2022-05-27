@@ -8,32 +8,8 @@
   ],
   "comments": [
     {
-      "id": 2,
-      "body": "Atualização do comentario aqui"
-    },
-    {
-      "id": 3,
-      "body": "Novo comentario aqui"
-    },
-    {
-      "id": 4,
-      "body": "Novo comentario aqui"
-    },
-    {
-      "id": 6,
-      "body": "Atualização do comentario aqui"
-    },
-    {
-      "id": 8,
-      "body": "Novo comentario aqui"
-    },
-    {
-      "id": 9,
-      "body": "Novo comentario aqui"
-    },
-    {
-      "id": 10,
-      "body": "novo comentario usando dinamico"
+      "id": 1,
+      "body": "novo"
     }
   ],
   "profile": {

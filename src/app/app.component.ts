@@ -9,7 +9,6 @@ import { CommentsService } from 'src/services/core/comments.service';
   styleUrls: ['./app.component.scss']
 })
 
-
 export class AppComponent implements OnInit {
   public commentse: any;
   public comments: any;
@@ -24,9 +23,11 @@ export class AppComponent implements OnInit {
   title = 'angular-http';
 
   public getComments() {
-    this.commentsService.getMethod().then((data) => {
-      this.comments = data;
-    })
+    this.commentsService.getMethod()
+      .then((data) => {
+        this.comments = data;
+      })
+      .catch((err) => console.log(err));
   }
 
   public showSubscription(): void {
@@ -35,6 +36,7 @@ export class AppComponent implements OnInit {
 
   public getMethod() {
     this.commentsService.getMethod();
+    this.getComments();
   }
 
   public postMethod(commentBody: string) {
